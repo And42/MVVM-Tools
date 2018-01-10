@@ -2,8 +2,17 @@
 
 namespace MVVM_Tools.Code.Utils
 {
+    /// <summary>
+    /// Provides common functions
+    /// </summary>
     public static class CommonUtils
     {
+        /// <summary>
+        /// Casts value to the target type throwing errors on incorrect values
+        /// </summary>
+        /// <param name="value">Value to cast</param>
+        /// <typeparam name="TValidType">Target value type</typeparam>
+        /// <exception cref="ArgumentException">Is thrown then value can not be cast</exception>
         public static TValidType CheckValueTypeAndCast<TValidType>(object value)
         {
             if (ReferenceEquals(value, null))
