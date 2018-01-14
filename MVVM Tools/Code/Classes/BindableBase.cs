@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using MVVM_Tools.Code.Providers;
 
 namespace MVVM_Tools.Code.Classes
 {
@@ -45,6 +46,38 @@ namespace MVVM_Tools.Code.Classes
             OnPropertyChanged(propertyName);
 
             return true;
+        }
+
+        /// <summary>
+        /// Creates <see cref="PropertyProvider{TPropertyType}"/> and tunnels <see cref="PropertyProvider{TPropertyType}"/>.PropertyChanged to the current object
+        /// </summary>
+        /// <param name="targetPropertyName">Property name to notify</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected PropertyProvider<TPropertyType> CreateProviderWithNotify<TPropertyType>(
+            string targetPropertyName, TPropertyType initialValue = default)
+        {
+            var provider = new PropertyProvider<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => OnPropertyChanged(targetPropertyName);
+
+            return provider;
+        }
+
+        /// <summary>
+        /// Creates <see cref="PropertyRefProvider{TPropertyType}"/> and tunnels <see cref="PropertyRefProvider{TPropertyType}"/>.PropertyChanged to the current object
+        /// </summary>
+        /// <param name="targetPropertyName">Property name to notify</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected PropertyRefProvider<TPropertyType> CreateRefProviderWithNotify<TPropertyType>(
+            string targetPropertyName, TPropertyType initialValue = default) where TPropertyType : class
+        {
+            var provider = new PropertyRefProvider<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => OnPropertyChanged(targetPropertyName);
+
+            return provider;
         }
 
         /// <summary>
