@@ -3,9 +3,9 @@
 namespace MVVM_Tools.Code.Commands
 {
     /// <summary>
-    /// Command that implements <see cref="IActionCommand{TParameter}"/> interface. Parameters is of the <see cref="object"/> type
+    /// Command that implements <see cref="IActionCommand"/> interface. Parameters is of the <see cref="object"/> type
     /// </summary>
-    public class ActionCommand : ActionCommand<object>
+    public class ActionCommand : ActionCommand<object>, IActionCommand
     {
         /// <summary>
         /// Creates a new instance of the <see cref="ActionCommand"/>
