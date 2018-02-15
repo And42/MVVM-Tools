@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Windows.Input;
 
 namespace MVVM_Tools.Code.Commands
 {
     /// <summary>
-    /// Command that implements <see cref="ICommand"/> interface. Parameters is of the <see cref="object"/> type
+    /// Command that implements <see cref="IActionCommand{TParameter}"/> interface. Parameters is of the <see cref="object"/> type
     /// </summary>
     public class ActionCommand : ActionCommand<object>
     {

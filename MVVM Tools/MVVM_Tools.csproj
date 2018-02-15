@@ -46,6 +46,7 @@
     <Compile Include="Code\Classes\ValidationableBase.cs" />
     <Compile Include="Code\Commands\ActionCommand.cs" />
     <Compile Include="Code\Commands\ActionCommand.Generic.cs" />
+    <Compile Include="Code\Commands\IActionCommand.Generic.cs" />
     <Compile Include="Code\Converters\FalseToVisibleConverter.cs" />
     <Compile Include="Code\Converters\InvertBoolConverter.cs" />
     <Compile Include="Code\Converters\NullToDisabledConverter.cs" />

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Windows.Input;
 using MVVM_Tools.Code.Utils;
 
 namespace MVVM_Tools.Code.Commands
 {
     /// <summary>
-    /// Command that implements <see cref="ICommand"/> interface
+    /// Command that implements <see cref="IActionCommand{TParameter}"/> interface
     /// </summary>
     /// <typeparam name="TParameter">Parameter value type</typeparam>
-    public class ActionCommand<TParameter> : ICommand
+    public class ActionCommand<TParameter> : IActionCommand<TParameter>
     {
         private readonly Func<TParameter, bool> _canExecuteAction;
         private readonly Action<TParameter> _executeAction;
@@ -32,18 +31,26 @@ namespace MVVM_Tools.Code.Commands
         /// <inheritdoc />
         public bool CanExecute(object parameter)
         {
-            return _canExecuteAction(CommonUtils.CheckValueTypeAndCast<TParameter>(parameter));
+            return CanExecute(CommonUtils.CheckValueTypeAndCast<TParameter>(parameter));
         }
 
         /// <inheritdoc />
         public void Execute(object parameter)
         {
-            var typedParameter = CommonUtils.CheckValueTypeAndCast<TParameter>(parameter);
+            Execute(CommonUtils.CheckValueTypeAndCast<TParameter>(parameter));
+        }
 
-            if (!_canExecuteAction(typedParameter))
+        public bool CanExecute(TParameter parameter)
+        {
+            return _canExecuteAction(parameter);
+        }
+
+        public void Execute(TParameter parameter)
+        {
+            if (!CanExecute(parameter))
                 return;
 
-            _executeAction(typedParameter);
+            _executeAction(parameter);
         }
 
         /// <summary>
