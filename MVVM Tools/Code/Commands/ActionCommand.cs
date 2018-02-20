@@ -19,5 +19,13 @@ namespace MVVM_Tools.Code.Commands
                   canExecuteAction == null ? (Func<object, bool>)null : parameter => canExecuteAction()
               )
         { }
+
+        /// <summary>
+        /// Executes the command with null as a parameter
+        /// </summary>
+        public void Execute()
+        {
+            Execute(null);
+        }
     }
 }
