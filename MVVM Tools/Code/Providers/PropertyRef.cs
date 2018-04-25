@@ -4,23 +4,23 @@ namespace MVVM_Tools.Code.Providers
 {
     /// <summary>
     /// Provider for the properties (use <see cref="BindableBase.PropertyChanged"/> to subscribe for changes).
-    /// Uses <see cref="BindableBase.SetProperty{TPropertyType}"/> when setting new value
+    /// Uses <see cref="BindableBase.SetPropertyRef{TPropertyType}"/> when setting new value
     /// </summary>
     /// <typeparam name="TPropertyType">Property type</typeparam>
-    public class PropertyProvider<TPropertyType> : BindableBase
+    public class PropertyRef<TPropertyType> : BindableBase where TPropertyType : class
     {
         private TPropertyType _value;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="PropertyProvider{TPropertyType}"/> class
+        /// Creates a new instance of the <see cref="PropertyRef{TPropertyType}"/> class
         /// </summary>
-        public PropertyProvider() { }
+        public PropertyRef() { }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="PropertyProvider{TPropertyType}"/> class
+        /// Creates a new instance of the <see cref="Property{TPropertyType}"/> class
         /// </summary>
         /// <param name="initialValue">Initial value for the backing field</param>
-        public PropertyProvider(TPropertyType initialValue)
+        public PropertyRef(TPropertyType initialValue)
         {
             _value = initialValue;
         }
@@ -31,7 +31,7 @@ namespace MVVM_Tools.Code.Providers
         public TPropertyType Value
         {
             get => _value;
-            set => SetProperty(ref _value, value);
+            set => SetPropertyRef(ref _value, value);
         }
     }
 }

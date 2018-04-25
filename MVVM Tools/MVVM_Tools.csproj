@@ -56,8 +56,8 @@
     <Compile Include="Code\Disposables\CustomBoolDisposable.cs" />
     <Compile Include="Code\Internal\CompilerAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\Providers\PropertyProvider.cs" />
-    <Compile Include="Code\Providers\PropertyRefProvider.cs" />
+    <Compile Include="Code\Providers\Property.cs" />
+    <Compile Include="Code\Providers\PropertyRef.cs" />
     <Compile Include="Code\Utils\CommonUtils.cs" />
   </ItemGroup>
   <ItemGroup>

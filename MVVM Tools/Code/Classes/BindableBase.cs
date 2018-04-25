@@ -49,15 +49,15 @@ namespace MVVM_Tools.Code.Classes
         }
 
         /// <summary>
-        /// Creates <see cref="PropertyProvider{TPropertyType}"/> and tunnels <see cref="PropertyProvider{TPropertyType}"/>.PropertyChanged to the current object
+        /// Creates <see cref="Property{TPropertyType}"/> and tunnels <see cref="Property{TPropertyType}"/>.PropertyChanged to the current object
         /// </summary>
         /// <param name="targetPropertyName">Property name to notify</param>
         /// <param name="initialValue">Initial property value</param>
         /// <typeparam name="TPropertyType">Property value type</typeparam>
-        protected PropertyProvider<TPropertyType> CreateProviderWithNotify<TPropertyType>(
+        protected Property<TPropertyType> CreatePropertyWithNotify<TPropertyType>(
             string targetPropertyName, TPropertyType initialValue = default)
         {
-            var provider = new PropertyProvider<TPropertyType>(initialValue);
+            var provider = new Property<TPropertyType>(initialValue);
 
             provider.PropertyChanged += (sender, args) => OnPropertyChanged(targetPropertyName);
 
@@ -65,15 +65,15 @@ namespace MVVM_Tools.Code.Classes
         }
 
         /// <summary>
-        /// Creates <see cref="PropertyRefProvider{TPropertyType}"/> and tunnels <see cref="PropertyRefProvider{TPropertyType}"/>.PropertyChanged to the current object
+        /// Creates <see cref="PropertyRef{TPropertyType}"/> and tunnels <see cref="PropertyRef{TPropertyType}"/>.PropertyChanged to the current object
         /// </summary>
         /// <param name="targetPropertyName">Property name to notify</param>
         /// <param name="initialValue">Initial property value</param>
         /// <typeparam name="TPropertyType">Property value type</typeparam>
-        protected PropertyRefProvider<TPropertyType> CreateRefProviderWithNotify<TPropertyType>(
+        protected PropertyRef<TPropertyType> CreatePropertyRefWithNotify<TPropertyType>(
             string targetPropertyName, TPropertyType initialValue = default) where TPropertyType : class
         {
-            var provider = new PropertyRefProvider<TPropertyType>(initialValue);
+            var provider = new PropertyRef<TPropertyType>(initialValue);
 
             provider.PropertyChanged += (sender, args) => OnPropertyChanged(targetPropertyName);
 
