@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using MVVM_Tools.Code.Providers;
 
@@ -65,6 +68,48 @@ namespace MVVM_Tools.Code.Classes
         }
 
         /// <summary>
+        /// Creates <see cref="Property{TPropertyType}"/> and tunnels <see cref="Property{TPropertyType}"/>.PropertyChanged to the source object
+        /// </summary>
+        /// <param name="source">Source container to bind to</param>
+        /// <param name="propertyExpression">Property expression</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TSource">Source type</typeparam>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected void BindProperty<TSource, TPropertyType>(
+            TSource source,
+            Expression<Func<TSource, Property<TPropertyType>>> propertyExpression,
+            TPropertyType initialValue = default) where TSource : BindableBase
+        {
+            PropertyInfo property = GetPropertyInfo(propertyExpression);
+
+            var provider = new Property<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => source.OnPropertyChanged(property.Name);
+
+            property.SetValue(source, provider, null);
+        }
+
+        /// <summary>
+        /// Creates <see cref="Property{TPropertyType}"/> and tunnels <see cref="Property{TPropertyType}"/>.PropertyChanged to the source object
+        /// </summary>
+        /// <param name="propertyExpression">Property expression</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected void BindProperty<TPropertyType>(
+            Expression<Func<Property<TPropertyType>>> propertyExpression,
+            TPropertyType initialValue = default)
+        {
+            PropertyInfo property = GetPropertyInfo(propertyExpression);
+
+            var provider = new Property<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => OnPropertyChanged(property.Name);
+
+            property.SetValue(this, provider, null);
+        }
+
+
+        /// <summary>
         /// Creates <see cref="PropertyRef{TPropertyType}"/> and tunnels <see cref="PropertyRef{TPropertyType}"/>.PropertyChanged to the current object
         /// </summary>
         /// <param name="targetPropertyName">Property name to notify</param>
@@ -81,6 +126,47 @@ namespace MVVM_Tools.Code.Classes
         }
 
         /// <summary>
+        /// Creates <see cref="PropertyRef{TPropertyType}"/> and tunnels <see cref="PropertyRef{TPropertyType}"/>.PropertyChanged to the source object
+        /// </summary>
+        /// <param name="source">Source container to bind to</param>
+        /// <param name="propertyExpression">Property expression</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TSource">Source type</typeparam>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected void BindPropertyRef<TSource, TPropertyType>(
+            TSource source,
+            Expression<Func<TSource, PropertyRef<TPropertyType>>> propertyExpression,
+            TPropertyType initialValue = default) where TSource : BindableBase where TPropertyType : class
+        {
+            PropertyInfo property = GetPropertyInfo(propertyExpression);
+
+            var provider = new PropertyRef<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => source.OnPropertyChanged(property.Name);
+
+            property.SetValue(source, provider, null);
+        }
+
+        /// <summary>
+        /// Creates <see cref="PropertyRef{TPropertyType}"/> and tunnels <see cref="PropertyRef{TPropertyType}"/>.PropertyChanged to the source object
+        /// </summary>
+        /// <param name="propertyExpression">Property expression</param>
+        /// <param name="initialValue">Initial property value</param>
+        /// <typeparam name="TPropertyType">Property value type</typeparam>
+        protected void BindPropertyRef<TPropertyType>(
+            Expression<Func<PropertyRef<TPropertyType>>> propertyExpression,
+            TPropertyType initialValue = default) where TPropertyType : class
+        {
+            PropertyInfo property = GetPropertyInfo(propertyExpression);
+
+            var provider = new PropertyRef<TPropertyType>(initialValue);
+
+            provider.PropertyChanged += (sender, args) => OnPropertyChanged(property.Name);
+
+            property.SetValue(this, provider, null);
+        }
+
+        /// <summary>
         /// Occurs on property changes
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
@@ -92,6 +178,42 @@ namespace MVVM_Tools.Code.Classes
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private static PropertyInfo GetPropertyInfo<TProperty>(Expression<Func<TProperty>> propertyLambda)
+        {
+            MemberExpression member = propertyLambda.Body as MemberExpression;
+            if (member == null)
+                throw new ArgumentException(
+                    $"Expression '{propertyLambda}' refers to a method, not a property.");
+
+            PropertyInfo propInfo = member.Member as PropertyInfo;
+            if (propInfo == null)
+                throw new ArgumentException(
+                    $"Expression '{propertyLambda}' refers to a field, not a property.");
+
+            return propInfo;
+        }
+
+        private static PropertyInfo GetPropertyInfo<TSource, TProperty>(Expression<Func<TSource, TProperty>> propertyLambda)
+        {
+            Type type = typeof(TSource);
+
+            MemberExpression member = propertyLambda.Body as MemberExpression;
+            if (member == null)
+                throw new ArgumentException(
+                    $"Expression '{propertyLambda}' refers to a method, not a property.");
+
+            PropertyInfo propInfo = member.Member as PropertyInfo;
+            if (propInfo == null)
+                throw new ArgumentException(
+                    $"Expression '{propertyLambda}' refers to a field, not a property.");
+
+            if (type != propInfo.ReflectedType && !type.IsSubclassOf(propInfo.ReflectedType))
+                throw new ArgumentException(
+                    $"Expression '{propertyLambda}' refers to a property that is not from type {type}.");
+
+            return propInfo;
         }
     }
 }
