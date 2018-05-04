@@ -54,7 +54,7 @@ namespace MVVM_Tools.Code.Classes
         /// <param name="targetPropertyName">Property name to notify</param>
         /// <param name="initialValue">Initial property value</param>
         /// <typeparam name="TPropertyType">Property value type</typeparam>
-        protected Property<TPropertyType> CreatePropertyWithNotify<TPropertyType>(
+        protected Property<TPropertyType> BindProperty<TPropertyType>(
             string targetPropertyName, TPropertyType initialValue = default)
         {
             var provider = new Property<TPropertyType>(initialValue);
@@ -70,7 +70,7 @@ namespace MVVM_Tools.Code.Classes
         /// <param name="targetPropertyName">Property name to notify</param>
         /// <param name="initialValue">Initial property value</param>
         /// <typeparam name="TPropertyType">Property value type</typeparam>
-        protected PropertyRef<TPropertyType> CreatePropertyRefWithNotify<TPropertyType>(
+        protected PropertyRef<TPropertyType> BindPropertyRef<TPropertyType>(
             string targetPropertyName, TPropertyType initialValue = default) where TPropertyType : class
         {
             var provider = new PropertyRef<TPropertyType>(initialValue);
