@@ -12,9 +12,15 @@ namespace MVVM_Tools.Code.Providers
         private TPropertyType _value;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="Property{TPropertyType}"/> class
+        /// Property initial value (passed to the constructor or the default value of the <see cref="TPropertyType"/>)
         /// </summary>
-        public Property() { }
+        public TPropertyType InitialValue { get; }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Creates a new instance of the <see cref="T:MVVM_Tools.Code.Providers.Property`1" /> class
+        /// </summary>
+        public Property(): this(default) { }
 
         /// <summary>
         /// Creates a new instance of the <see cref="Property{TPropertyType}"/> class
@@ -22,6 +28,7 @@ namespace MVVM_Tools.Code.Providers
         /// <param name="initialValue">Initial value for the backing field</param>
         public Property(TPropertyType initialValue)
         {
+            InitialValue = initialValue;
             _value = initialValue;
         }
 
@@ -32,6 +39,14 @@ namespace MVVM_Tools.Code.Providers
         {
             get => _value;
             set => SetProperty(ref _value, value);
+        }
+
+        /// <summary>
+        /// Restores <see cref="InitialValue"/> by assigning it to the <see cref="Value"/> property
+        /// </summary>
+        public void ResetValue()
+        {
+            Value = InitialValue;
         }
     }
 }
