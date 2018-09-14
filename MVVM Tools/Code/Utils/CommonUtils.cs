@@ -5,7 +5,7 @@ namespace MVVM_Tools.Code.Utils
     /// <summary>
     /// Provides common functions
     /// </summary>
-    public static class CommonUtils
+    internal static class CommonUtils
     {
         /// <summary>
         /// Casts value to the target type throwing errors on incorrect values
