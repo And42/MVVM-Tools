@@ -15,7 +15,7 @@ namespace MVVM_Tools.Code.Classes
     {
         private static readonly bool IsSourceNullable = default(TSource) == null;
         private static readonly bool IsParameterNullable = default(TParameter) == null;
-        private static readonly bool IsTargetNullable = default(TSource) == null;
+        private static readonly bool IsTargetNullable = default(TTarget) == null;
 
         /// <inheritdoc />
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
