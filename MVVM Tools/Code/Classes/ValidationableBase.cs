@@ -17,7 +17,7 @@ namespace MVVM_Tools.Code.Classes
         /// <summary>
         /// Performs checks and returns the first error related to the property
         /// </summary>
-        /// <param name="propertyName">Property name used for checking</param>
+        /// <param name="propertyName">FieldProperty name used for checking</param>
         /// <returns>Error text if there is at least one error; otherwise, <see cref="string.Empty"/></returns>
         public string this[string propertyName]
         {
@@ -54,8 +54,8 @@ namespace MVVM_Tools.Code.Classes
         /// <summary>
         /// Returns whether specified property has errors
         /// </summary>
-        /// <typeparam name="TProperty">Property value type</typeparam>
-        /// <param name="propertyExpression">Property expression</param>
+        /// <typeparam name="TProperty">FieldProperty value type</typeparam>
+        /// <param name="propertyExpression">FieldProperty expression</param>
         /// <returns><code>True</code> if has; otherwise (including when property is not found), <code>False</code></returns>
         protected bool HasErrors<TProperty>(Expression<Func<TProperty>> propertyExpression)
         {
@@ -67,7 +67,7 @@ namespace MVVM_Tools.Code.Classes
         /// <summary>
         /// Returns whether specified property has errors
         /// </summary>
-        /// <param name="propertyName">Property name</param>
+        /// <param name="propertyName">FieldProperty name</param>
         /// <returns><code>True</code> if has; otherwise (including when property is not found), <code>False</code></returns>
         protected bool HasErrors(string propertyName)
         {
@@ -80,8 +80,8 @@ namespace MVVM_Tools.Code.Classes
         /// <summary>
         /// Adds validation rule to provided property
         /// </summary>
-        /// <typeparam name="TProperty">Property value type</typeparam>
-        /// <param name="propertyExpression">Property expression</param>
+        /// <typeparam name="TProperty">FieldProperty value type</typeparam>
+        /// <param name="propertyExpression">FieldProperty expression</param>
         /// <param name="errorChecker">Function that checks property for errors and returns result message (<code>null</code> or <see cref="string.Empty"/> if there are no errors)</param>
         protected void AddValidationRule<TProperty>(Expression<Func<TProperty>> propertyExpression, Func<string> errorChecker)
         {

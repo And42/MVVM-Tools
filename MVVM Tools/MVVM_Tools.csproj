@@ -55,9 +55,11 @@
     <Compile Include="Code\Converters\TrueToVisibleConverter.cs" />
     <Compile Include="Code\Disposables\CustomBoolDisposable.cs" />
     <Compile Include="Code\Internal\CompilerAttributes.cs" />
+    <Compile Include="Code\Providers\DelegatedProperty.cs" />
+    <Compile Include="Code\Providers\IProperty.cs" />
+    <Compile Include="Code\Providers\IReadonlyProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Code\Providers\Property.cs" />
-    <Compile Include="Code\Providers\PropertyRef.cs" />
+    <Compile Include="Code\Providers\FieldProperty.cs" />
     <Compile Include="Code\Utils\CommonUtils.cs" />
   </ItemGroup>
   <ItemGroup>
