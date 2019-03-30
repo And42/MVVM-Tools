@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using MVVM_Tools.Code.Providers;
 
 namespace MVVM_Tools.Code.Commands
 {
@@ -12,5 +13,7 @@ namespace MVVM_Tools.Code.Commands
         /// Raises <see cref="CanExecuteChanged"/> event
         /// </summary>
         void RaiseCanExecuteChanged();
+
+        IActionCommand<TParameter> BindCanExecute<T>(IReadonlyProperty<T> property);
     }
 }

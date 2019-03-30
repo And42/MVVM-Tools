@@ -1,4 +1,5 @@
 ﻿using System;
+using MVVM_Tools.Code.Providers;
 
 namespace MVVM_Tools.Code.Commands
 {
@@ -26,6 +27,12 @@ namespace MVVM_Tools.Code.Commands
         public void Execute()
         {
             Execute(null);
+        }
+
+        public new IActionCommand BindCanExecute<T>(IReadonlyProperty<T> property)
+        {
+            base.BindCanExecute(property);
+            return this;
         }
     }
 }

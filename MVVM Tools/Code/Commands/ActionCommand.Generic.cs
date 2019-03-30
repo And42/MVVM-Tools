@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using MVVM_Tools.Code.Providers;
 using MVVM_Tools.Code.Utils;
 
 namespace MVVM_Tools.Code.Commands
@@ -61,9 +63,20 @@ namespace MVVM_Tools.Code.Commands
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        public IActionCommand<TParameter> BindCanExecute<T>(IReadonlyProperty<T> property)
+        {
+            property.PropertyChanged += BoundPropertyChanged;
+            return this;
+        }
+
         /// <inheritdoc />
         public event EventHandler CanExecuteChanged;
 
         private static bool TrueCanExecute(TParameter obj) => true;
+
+        private void BoundPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            RaiseCanExecuteChanged();
+        }
     }
 }
