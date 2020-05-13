@@ -7,6 +7,8 @@
     <Authors>Andrey Skobtsov</Authors>
     <Copyright>© Andrey Skobtsov, 2018</Copyright>
     <Version>1.6.0.0</Version>
+    <PackageId>MVVM_Tools</PackageId>
+    <AssemblyName>MVVM_Tools</AssemblyName>
   </PropertyGroup>
 
 </Project>
