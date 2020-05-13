@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM_Tools", "MVVM Tools\MVVM_Tools.csproj", "{5E778515-60AD-4257-8BBE-0A3CFF7A91A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVM Tools", "MVVM Tools\MVVM Tools.csproj", "{5E778515-60AD-4257-8BBE-0A3CFF7A91A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
