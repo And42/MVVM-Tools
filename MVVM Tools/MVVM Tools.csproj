@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <Authors>Andrey Skobtsov</Authors>
     <Copyright>© Andrey Skobtsov, 2018</Copyright>
-    <Version>1.5.2.0</Version>
+    <Version>1.6.0.0</Version>
   </PropertyGroup>
 
 </Project>
