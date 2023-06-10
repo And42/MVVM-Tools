@@ -1,14 +1,23 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>MVVM_Tools</RootNamespace>
     <UseWPF>true</UseWPF>
     <Authors>Andrey Skobtsov</Authors>
-    <Copyright>© Andrey Skobtsov, 2018</Copyright>
+    <Copyright>Andrey Skobtsov</Copyright>
     <Version>1.6.1.0</Version>
     <PackageId>MVVM_Tools</PackageId>
     <AssemblyName>MVVM_Tools</AssemblyName>
+    <Title>MVVM Tools</Title>
+    <Description>Provides basic classed for MVVM approach in WPF</Description>
+    <PackageProjectUrl>https://github.com/And42/MVVM-Tools</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/And42/MVVM-Tools</RepositoryUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="../LICENSE.txt" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
